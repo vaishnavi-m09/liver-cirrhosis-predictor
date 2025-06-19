@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Information - Liver Cirrhosis Predictor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      background-image: url("{{ url_for('static', filename='assets/liver_bg.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    header {
+      
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+      padding: 30px;
+    }
+
+    h2 {
+      color: #df3939;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input, select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      background-color: #fdfdfd;
+    }
+
+    button {
+      grid-column: span 2;
+      padding: 15px;
+      background: #df3939;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #b92d2d;
+    }
+
+    .result {
+      font-size: 1.2rem;
+      color: #2b9348;
+      margin-top: 25px;
+      text-align: center;
+      background: #e3fce6;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #c1e7c5;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      button {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Patient Information Form</h1>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Enter Patient Details</h2>
+      <form method="POST">
+        {% for field in numeric_fields %}
+        <div class="form-group">
+          <label>{{ field }}</label>
+          <input type="text" name="{{ field }}" value="{{ request.form.get(field, '') }}">
+        </div>
+        {% endfor %}
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select name="gender">
+            {% for option in ['male', 'female', 'transgender'] %}
+              <option value="{{ option }}" {% if request.form.get('gender') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Place</label>
+          <select name="place">
+            {% for option in ['rural', 'urban', 'unknown'] %}
+              <option value="{{ option }}" {% if request.form.get('place') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Type of Alcohol Consumed</label>
+          <select name="alcohol_type">
+            {% for option in ['country liquor', 'branded liquor', 'both'] %}
+              <option value="{{ option }}" {% if request.form.get('alcohol_type') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Hepatitis B Infection</label>
+          <select name="hbv">
+            {% for option in ['positive', 'negative'] %}
+              <option value="{{ option }}" {% if request.form.get('hbv') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Hepatitis C Infection</label>
+          <select name="hcv">
+            {% for option in ['positive', 'negative'] %}
+              <option value="{{ option }}" {% if request.form.get('hcv') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Diabetes Result</label>
+          <select name="diabetes">
+            {% for option in ['yes', 'no'] %}
+              <option value="{{ option }}" {% if request.form.get('diabetes') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Obesity</label>
+          <select name="obesity">
+            {% for option in ['yes', 'no'] %}
+              <option value="{{ option }}" {% if request.form.get('obesity') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Family History of Cirrhosis</label>
+          <select name="family_history">
+            {% for option in ['yes', 'no'] %}
+              <option value="{{ option }}" {% if request.form.get('family_history') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>USG Abdomen</label>
+          <select name="usg">
+            {% for option in ['yes', 'no'] %}
+              <option value="{{ option }}" {% if request.form.get('usg') == option %}selected{% endif %}>{{ option|capitalize }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <br>
+        
+        <button type="submit">Predict Cirrhosis Risk </button>
+      </form>
+
+      {% if prediction %}
+      <div class="result">
+        <strong>Prediction:</strong> {{ prediction }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
