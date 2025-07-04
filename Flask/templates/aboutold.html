@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About - Liver Cirrhosis Predictor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url("{{ url_for('static', filename='assets/liver_bg.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+
+    header {
+      background: #df3939;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      color: #df3939;
+      margin-top: 30px;
+    }
+
+    p, li {
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Liver Cirrhosis Predictor</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="section">
+      <h2>➕ Data Collection & Data Pre-Processing</h2>
+      <p>
+        Liver cirrhosis prediction starts with gathering high-quality medical data. For this project, we utilize publicly available datasets like the Indian Liver Patient Dataset (ILPD) or Google Landmark Dataset (if imaging is used). The dataset includes clinical features such as bilirubin levels, albumin, enzyme concentrations, age, gender, and disease classification.
+      </p>
+      <p>Data Pre-Processing involves:</p>
+      <ul>
+        <li>Handling missing values through imputation or removal.</li>
+        <li>Encoding categorical variables (e.g., gender).</li>
+        <li>Normalizing or scaling numeric features to ensure uniformity.</li>
+        <li>Balancing the dataset using techniques like SMOTE, to address class imbalance (common in medical datasets).</li>
+      </ul>
+      <p>This phase ensures that the input data is clean, consistent, and ready for machine learning algorithms.</p>
+    </div>
+
+    <div class="section">
+      <h2>➕ Exploratory Data Analysis (EDA)</h2>
+      <p>
+        Exploratory Data Analysis reveals hidden patterns and insights within the dataset. It is critical for understanding relationships between features and identifying outliers.
+      </p>
+      <p>Key steps include:</p>
+      <ul>
+        <li>Descriptive statistics: Mean, median, mode, and standard deviation.</li>
+        <li>Correlation matrix: To identify relationships between features and the target label.</li>
+        <li>Visualization tools:</li>
+        <ul>
+          <li>Histograms and box plots for distribution analysis.</li>
+          <li>Heatmaps to assess feature correlation.</li>
+          <li>Violin and scatter plots to visualize class separability.</li>
+        </ul>
+      </ul>
+      <p>Insights from EDA help in selecting relevant features and building more effective models.</p>
+    </div>
+
+    <div class="section">
+      <h2>➕ Model Building</h2>
+      <p>
+        We implement a range of machine learning models to classify whether a patient is at risk of liver cirrhosis.
+      </p>
+      <p>Models used:</p>
+      <ul>
+        <li>Logistic Regression: As a baseline.</li>
+        <li>Random Forest and XGBoost: For handling nonlinear relationships and capturing feature importance.</li>
+        <li>Support Vector Machine (SVM): For precise boundary classification.</li>
+        <li>Neural Networks (ANNs): For deeper pattern recognition, especially if imaging data is included.</li>
+      </ul>
+      <p>The model is trained on the processed data using cross-validation to ensure robustness and prevent overfitting.</p>
+    </div>
+
+    <div class="section">
+      <h2>➕ Performance Testing & Hyperparameter Tuning</h2>
+      <p>To evaluate model performance, we use metrics like:</p>
+      <ul>
+        <li>Accuracy</li>
+        <li>Precision & Recall</li>
+        <li>F1-Score</li>
+        <li>ROC-AUC Curve</li>
+      </ul>
+      <p>We then fine-tune hyperparameters using:</p>
+      <ul>
+        <li>Grid Search and Random Search</li>
+        <li>Bayesian Optimization (for advanced tuning)</li>
+      </ul>
+      <p>Cross-validation is repeated during tuning to ensure the model generalizes well to unseen data.</p>
+    </div>
+
+    <div class="section">
+      <h2>➕ Model Deployment</h2>
+      <p>After achieving optimal performance, the model is deployed in a user-accessible web application.</p>
+      <p>Deployment steps include:</p>
+      <ul>
+        <li>Model Serialization using joblib or pickle.</li>
+        <li>Backend Integration using Flask or FastAPI.</li>
+        <li>Frontend Interface to collect user inputs and display predictions.</li>
+        <li>Cloud Hosting on platforms like AWS, Heroku, or Azure for accessibility and scalability.</li>
+      </ul>
+      <p>The deployed model provides real-time predictions and can aid clinicians or patients in early detection and intervention of liver cirrhosis.</p>
+    </div>
+  </div>
+</body>
+</html>

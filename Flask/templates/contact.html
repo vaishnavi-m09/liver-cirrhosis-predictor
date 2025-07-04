@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - Liver Cirrhosis Predictor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url("{{ url_for('static', filename='assets/liver_bg.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+
+    header {
+      background: #df3939;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: white;
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 100px auto;
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    h2 {
+      color: #df3939;
+      margin-bottom: 30px;
+    }
+
+    .team-member {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .team-member strong {
+      color: #b62d2d;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Liver Cirrhosis Predictor</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Project Built By</h2>
+
+    <div class="team-member">
+      <strong>1) Arjuun B</strong><br>
+      arjuun.b2023@vitstudent.ac.in
+    </div>
+
+    <div class="team-member">
+      <strong>2) Ruhann P N</strong><br>
+      ruhann.piskala2023@vitstudent.ac.in
+    </div>
+
+    <div class="team-member">
+      <strong>3) M Vaishnavi</strong><br>
+      vaishnavi.m2023@vitstudent.ac.in
+    </div>
+  </div>
+
+</body>
+</html>
